@@ -1,0 +1,40 @@
+# Git
+.git
+.gitignore
+.github
+
+# Build artifacts
+bin/
+dist/
+build/
+*.exe
+*.test
+*.out
+
+# Documentation
+*.md
+!README.md
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Test files
+*_test.go
+coverage.out
+coverage.html
+
+# Examples and configs
+examples/
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Dependencies (will be downloaded during build)
+vendor/
