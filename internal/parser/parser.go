@@ -260,6 +260,8 @@ func Parse(data string) (*Stats, error) {
 }
 
 // parseField parses a single field and sets it in the Stats struct
+//
+//nolint:gocognit // This function is inherently complex due to the number of fields to parse
 func parseField(stats *Stats, key string, values []string) error {
 	if len(values) == 0 {
 		return fmt.Errorf("no values for key %s", key)

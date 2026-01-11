@@ -68,7 +68,7 @@ func TestGetStats(t *testing.T) {
 				assert.Equal(t, "/stats", r.URL.Path)
 				assert.Equal(t, http.MethodGet, r.Method)
 				w.WriteHeader(http.StatusOK)
-				w.Write([]byte("pid\t12345\nuptime\t1000"))
+				_, _ = w.Write([]byte("pid\t12345\nuptime\t1000"))
 			},
 			wantErr:  false,
 			wantData: "pid\t12345\nuptime\t1000",
@@ -155,7 +155,7 @@ func TestGetStatsTimeout(t *testing.T) {
 func BenchmarkGetStats(b *testing.B) {
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte("pid\t12345\nuptime\t1000"))
+		_, _ = w.Write([]byte("pid\t12345\nuptime\t1000"))
 	}))
 	defer server.Close()
 

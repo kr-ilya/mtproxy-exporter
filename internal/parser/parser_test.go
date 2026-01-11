@@ -192,6 +192,7 @@ func TestParseField(t *testing.T) {
 			key:    "pid",
 			values: []string{"12345"},
 			check: func(t *testing.T, s *Stats) {
+				t.Helper()
 				assert.Equal(t, int64(12345), s.PID)
 			},
 			wantErr: false,
@@ -201,6 +202,7 @@ func TestParseField(t *testing.T) {
 			key:    "average_idle_percent",
 			values: []string{"99.572"},
 			check: func(t *testing.T, s *Stats) {
+				t.Helper()
 				assert.Equal(t, 99.572, s.AverageIdlePercent)
 			},
 			wantErr: false,
@@ -210,6 +212,7 @@ func TestParseField(t *testing.T) {
 			key:    "config_filename",
 			values: []string{"/data/proxy-multi.conf"},
 			check: func(t *testing.T, s *Stats) {
+				t.Helper()
 				assert.Equal(t, "/data/proxy-multi.conf", s.ConfigFilename)
 			},
 			wantErr: false,
@@ -219,6 +222,7 @@ func TestParseField(t *testing.T) {
 			key:    "version",
 			values: []string{"mtproxy-0.02", "compiled", "at", "Jan", "10", "2026"},
 			check: func(t *testing.T, s *Stats) {
+				t.Helper()
 				assert.Equal(t, "mtproxy-0.02 compiled at Jan 10 2026", s.Version)
 			},
 			wantErr: false,
