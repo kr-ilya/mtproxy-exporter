@@ -72,9 +72,9 @@ func main() {
 	mux.Handle("/metrics", promhttp.Handler())
 
 	// Health endpoint
-	mux.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/health", func(w http.ResponseWriter, _ *http.Request) {
 		w.WriteHeader(http.StatusOK)
-		fmt.Fprintf(w, "OK\n")
+		_, _ = fmt.Fprintf(w, "OK\n")
 	})
 
 	// Ready endpoint
@@ -85,18 +85,18 @@ func main() {
 		_, err := mtproxyClient.GetStats(ctx)
 		if err != nil {
 			w.WriteHeader(http.StatusServiceUnavailable)
-			fmt.Fprintf(w, "MTProxy not reachable: %v\n", err)
+			_, _ = fmt.Fprintf(w, "MTProxy not reachable: %v\n", err)
 			return
 		}
 
 		w.WriteHeader(http.StatusOK)
-		fmt.Fprintf(w, "Ready\n")
+		_, _ = fmt.Fprintf(w, "Ready\n")
 	})
 
 	// Root endpoint
-	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/", func(w http.ResponseWriter, _ *http.Request) {
 		w.Header().Set("Content-Type", "text/html")
-		fmt.Fprintf(w, `<html>
+		_, _ = fmt.Fprintf(w, `<html>
 <head><title>MTProxy Exporter</title></head>
 <body>
 <h1>MTProxy Exporter v%s</h1>

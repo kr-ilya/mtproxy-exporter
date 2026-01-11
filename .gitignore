@@ -30,3 +30,5 @@ bin/
 # Environment
 .env
 .env.local
+
+golangci.reference.yml

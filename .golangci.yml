@@ -1,0 +1,34 @@
+version: "2"
+
+run:
+  timeout: 5m
+
+linters:
+  enable:
+    - errcheck
+    - govet
+    - ineffassign
+    - staticcheck
+    - unused
+    - misspell
+    - revive
+    - unconvert
+    - unparam
+    - gocyclo
+    - gocognit
+    - bodyclose
+    - noctx
+    - goconst
+    - whitespace
+    - errname
+    - errorlint
+    - makezero
+    - nilerr
+    - predeclared
+    - thelper
+
+  settings:
+    revive:
+      rules:
+        - name: package-comments
+          disabled: true
