@@ -64,7 +64,7 @@ tcp_writev_bytes	436498`
 
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte(statsData))
+		_, _ = w.Write([]byte(statsData))
 	}))
 	defer server.Close()
 
@@ -130,7 +130,7 @@ func TestCollector_Collect_ParseError(t *testing.T) {
 	// Server returns invalid data
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte("invalid data that cannot be parsed"))
+		_, _ = w.Write([]byte("invalid data that cannot be parsed"))
 	}))
 	defer server.Close()
 
@@ -160,7 +160,7 @@ tcp_readv_bytes	244761`
 
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte(statsData))
+		_, _ = w.Write([]byte(statsData))
 	}))
 	defer server.Close()
 
