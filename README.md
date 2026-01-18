@@ -29,9 +29,9 @@ Configuration can be provided via environment variables or command-line flags:
 
 ```bash
 docker run -d \
-  -p 9330:9330 \
+  -p 127.0.0.1:9330:9330 \
   -e MTPROXY_URL=http://your-mtproxy:8888 \
-  mtproxy-exporter:latest
+  imilya/mtproxy-exporter:latest
 ```
 
 ### Connecting to MTProxy Running on the Host
@@ -46,7 +46,7 @@ docker run -d \
   --name mtproxy-exporter \
   --network host \
   -e MTPROXY_URL=http://127.0.0.1:8888 \
-  mtproxy-exporter:latest
+  imilya/mtproxy-exporter:latest
 ```
 
 #### MacOS / Windows
@@ -82,9 +82,9 @@ Or use Docker Compose with the `networks` section (specify the network as `exter
 docker run -d \
   --name mtproxy-exporter \
   --network mtproxy-net \
-  -p 9330:9330 \
+  -p 127.0.0.1:9330:9330 \
   -e MTPROXY_URL=http://mtproxy:8888 \
-  mtproxy-exporter
+  imilya/mtproxy-exporter
 ```
 
 > **Key point:** `mtproxy` is the hostname of the container, Docker will resolve it to the container's IP automatically
