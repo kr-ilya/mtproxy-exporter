@@ -14,6 +14,17 @@ A modern, efficient Prometheus exporter for MTProxy (Telegram's MTProto Proxy) w
 
 ## Quick Start
 
+## Configuration
+
+Configuration can be provided via environment variables or command-line flags:
+
+| Flag | Environment Variable | Default | Description |
+|------|---------------------|---------|-------------|
+| `--listen.address` | `LISTEN_ADDRESS` | `:9330` | Address to listen on |
+| `--mtproxy.url` | `MTPROXY_URL` | `http://localhost:8888` | MTProxy stats URL |
+| `--mtproxy.timeout` | `MTPROXY_TIMEOUT` | `10s` | HTTP client timeout |
+| `--log.level` | `LOG_LEVEL` | `info` | Log level (debug, info, warn, error) |
+
 ### Using Docker
 
 ```bash
@@ -22,6 +33,26 @@ docker run -d \
   -e MTPROXY_URL=http://your-mtproxy:8888 \
   mtproxy-exporter:latest
 ```
+
+### Connecting to MTProxy Running on the Host
+
+If your MTProxy is running directly on the host machine (not in Docker), the exporter container cannot access it via localhost by default. Use one of the following methods depending on your operating system.
+
+#### Linux
+
+Use Docker host network mode:
+```
+docker run -d \
+  --name mtproxy-exporter \
+  --network host \
+  -e MTPROXY_URL=http://127.0.0.1:8888 \
+  mtproxy-exporter:latest
+```
+
+#### MacOS / Windows
+
+Use the special hostname `host.docker.internal`.
+
 
 ### Connecting to MTProxy in Docker
 
@@ -67,17 +98,6 @@ go install github.com/kr-ilya/mtproxy-exporter/cmd/mtproxy-exporter@latest
 # Run
 mtproxy-exporter --mtproxy.url=http://localhost:8888
 ```
-
-## Configuration
-
-Configuration can be provided via environment variables or command-line flags:
-
-| Flag | Environment Variable | Default | Description |
-|------|---------------------|---------|-------------|
-| `--listen.address` | `LISTEN_ADDRESS` | `:9330` | Address to listen on |
-| `--mtproxy.url` | `MTPROXY_URL` | `http://localhost:8888` | MTProxy stats URL |
-| `--mtproxy.timeout` | `MTPROXY_TIMEOUT` | `10s` | HTTP client timeout |
-| `--log.level` | `LOG_LEVEL` | `info` | Log level (debug, info, warn, error) |
 
 ## Exported Metrics
 
